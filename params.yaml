@@ -1,0 +1,25 @@
+# MP299 Fuel Station Daily Sales (Dehradun) - project settings
+data:
+  train: data/raw/train.csv
+  later: data/raw/later.csv
+  holdout: data/raw/holdout_features.csv
+  date_col: date
+  id_col: record_id
+  target: litres_per_day
+  group_col: zone
+
+features:
+  numeric: [highway_distance_km, nearby_pumps, price_rs, trucks_passing, temp_c, staff]
+  categorical: [ownership, zone]
+
+checks:
+  sentinel_candidates: [-1, -99, -999, 99, 999, 9999, 99999]
+  sentinel_min_count: 5
+  unit_factors: [10, 12, 60, 100, 1000]
+  unit_tolerance: 0.15        # ratio may be within 15% of the exact factor
+  stuck_min_rows: 10          # a run of identical values at least this long
+  typo_gap_ratio: 2.5         # jump between neighbouring sorted targets
+  leak_corr: 0.98
+
+reports:
+  data_issues: reports/data_issues.json
