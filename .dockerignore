@@ -1,0 +1,10 @@
+**
+!requirements.txt
+!app/
+!app/**
+!src/
+!src/**
+!models/
+!models/model.joblib
+**/__pycache__/
+**/*.py[cod]
