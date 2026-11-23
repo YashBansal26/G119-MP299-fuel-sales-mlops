@@ -38,10 +38,10 @@ data_issues:
     true_levels: null      # how many real categories there are after cleaning
 
 tracking:
-  experiment_name: null
-  best_run_id: null        # the MLflow run id of your v1 model
-  registered_model_name: null
-  champion_version: null
+  experiment_name: "G119-MP299-fuel-sales"
+  best_run_id: "a27d339a2edd44a4b2ccb441cec32afb"
+  registered_model_name: "mp299-fuel-sales"
+  champion_version: 1
 
 monitoring:
   psi:                     # cleaned train.csv vs later.csv, 10 bins
@@ -60,3 +60,4 @@ monitoring:
   mae_v1_on_check: null    # v1 on the last 30% of later.csv (by date)
   mae_v2_on_check: null    # v2 on the same rows
   decision: null           # promote or keep
+

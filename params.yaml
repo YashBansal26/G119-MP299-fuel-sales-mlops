@@ -36,3 +36,32 @@ cleaning:
   target_typo_factor: 10
   output: data/processed/train_clean.csv
   medians: data/processed/train_medians.json
+
+training:
+  random_state: 42
+  validation_fraction: 0.20
+  expected_data_sha256: 7d5e7fb87a385182fc2a2372e6cd4a5f8b48220316b37160299e895cc8e86711
+  experiment_name: G119-MP299-fuel-sales
+  registered_model_name: mp299-fuel-sales
+  artifact_location: tracking_artifacts
+  model_output: models/model.joblib
+  candidates:
+    - name: ridge-alpha-0.1
+      model: ridge
+      params: {alpha: 0.1}
+    - name: ridge-alpha-1
+      model: ridge
+      params: {alpha: 1.0}
+    - name: ridge-alpha-10
+      model: ridge
+      params: {alpha: 10.0}
+    - name: rf-100-depth-8
+      model: random_forest
+      params: {n_estimators: 100, max_depth: 8, n_jobs: 1}
+    - name: rf-200-depth-12
+      model: random_forest
+      params: {n_estimators: 200, max_depth: 12, n_jobs: 1}
+    - name: gbr-100-depth-2
+      model: gradient_boosting
+      params: {n_estimators: 100, max_depth: 2, learning_rate: 0.1}
+

@@ -71,15 +71,40 @@ rather than starting an API or a cluster.
   paths and the existing push-triggered CI. The
   [CI run for `1635f1a`](https://github.com/YashBansal26/G119-MP299-fuel-sales-mlops/actions/runs/45205615814)
   passed on GitHub. This documents an integration review, not model training.
-- **Model lead:** training, three or more tracked MLflow settings, the
-  registry/champion artifact and the `tracking` values in
-  `reports/findings.yaml` remain to be added. Fit learned preprocessing on
-  the training partition only and reuse it for validation/inference.
+- **Model lead (Sakshi):** six MLflow runs completed on a fixed 800/200
+  train/validation split. Ridge (`alpha=10`) won with MAE **1008.179 L/day**
+  (median baseline: 4471.195). The exact evaluated pipeline is saved in
+  `models/model.joblib` and registered as `mp299-fuel-sales`, version **1**,
+  alias **champion**. Tracking fields in `reports/findings.yaml` are filled.
+  Numeric imputation, scaling and category encoding learn only from the
+  training partition. See [the model handoff](docs/model-stage2.md).
 - **Next Ops check:** when model dependencies and tests arrive, keep library
   versions pinned in `requirements.txt` and verify the combined CI run.
   See [the Ops handoff](docs/ops-plan.md) for Stage 3 integration.
 
 This documentation update was prepared with AI assistance.
+
+### Model training and tracking
+
+Use Python 3.12 with `requirements.txt` installed. From the repository root:
+
+```powershell
+$env:PYTHONPATH="src"
+python -m pytest -q
+mlflow ui --backend-store-uri sqlite:///mlflow.db
+```
+
+The committed `mlflow.db` and `tracking_artifacts/` work together; keep both
+when cloning or copying the project. The tests load `@champion` after copying
+them into another directory, without requiring the original CSVs.
+
+To reproduce training in a **fresh copy without existing v1 tracking/model
+outputs**, place the unchanged original `train.csv` in `data/raw/` and run
+`python -m mp299.train`. The command validates its SHA256 first. It refuses
+to register another version if v1 already exists, preserving Stage 2 evidence.
+The existing `mp299.cleaning` command exports a fully imputed exploration CSV;
+training starts with raw data and applies the same fixed repair rules, then
+fits its imputer within the split to prevent validation leakage.
 
 ## Layout
 
@@ -89,3 +114,4 @@ src/mp299/             config.py, data_checks.py, explore.py
 tests/                 pytest tests (no CSVs needed)
 reports/findings.yaml  the marking form
 ```
+

@@ -1,0 +1,91 @@
+{
+  "experiment_name": "G119-MP299-fuel-sales",
+  "data_sha256": "7d5e7fb87a385182fc2a2372e6cd4a5f8b48220316b37160299e895cc8e86711",
+  "split_sha256": "a816851e5b97d467fa5bb2f8499c291807c27eb1c7e8bdd1502a8005480c5ca0",
+  "training_rows": 800,
+  "validation_rows": 200,
+  "baseline_mae": 4471.195,
+  "best": {
+    "name": "ridge-alpha-10",
+    "run_id": "a27d339a2edd44a4b2ccb441cec32afb",
+    "model": "ridge",
+    "params": {
+      "alpha": 10.0
+    },
+    "mae": 1008.1791928154735
+  },
+  "registered_model_name": "mp299-fuel-sales",
+  "champion_version": 1,
+  "runs": [
+    {
+      "name": "ridge-alpha-0.1",
+      "run_id": "b88f1d5fb4c346d18fd94b143d0b4496",
+      "model": "ridge",
+      "params": {
+        "alpha": 0.1
+      },
+      "mae": 1010.4036717663565
+    },
+    {
+      "name": "ridge-alpha-1",
+      "run_id": "061cee864f02463795e0d281603f8ed5",
+      "model": "ridge",
+      "params": {
+        "alpha": 1.0
+      },
+      "mae": 1010.1026606579686
+    },
+    {
+      "name": "ridge-alpha-10",
+      "run_id": "a27d339a2edd44a4b2ccb441cec32afb",
+      "model": "ridge",
+      "params": {
+        "alpha": 10.0
+      },
+      "mae": 1008.1791928154735
+    },
+    {
+      "name": "rf-100-depth-8",
+      "run_id": "5859169d1a6c46ad9b15984840e65b0c",
+      "model": "random_forest",
+      "params": {
+        "n_estimators": 100,
+        "max_depth": 8,
+        "n_jobs": 1
+      },
+      "mae": 1424.9126797200752
+    },
+    {
+      "name": "rf-200-depth-12",
+      "run_id": "a57269df53a2494483d8df5829792e6c",
+      "model": "random_forest",
+      "params": {
+        "n_estimators": 200,
+        "max_depth": 12,
+        "n_jobs": 1
+      },
+      "mae": 1403.1701418853843
+    },
+    {
+      "name": "gbr-100-depth-2",
+      "run_id": "77c3aae425d04ff2879a5598686adfb0",
+      "model": "gradient_boosting",
+      "params": {
+        "n_estimators": 100,
+        "max_depth": 2,
+        "learning_rate": 0.1
+      },
+      "mae": 1158.358341865432
+    }
+  ],
+  "versions": {
+    "pandas": "2.2.3",
+    "numpy": "2.1.3",
+    "scikit-learn": "1.6.1",
+    "scipy": "1.15.3",
+    "mlflow-skinny": "2.19.0",
+    "joblib": "1.4.2",
+    "cloudpickle": "3.0.0"
+  },
+  "model_sha256": "5461194f6b79e9cf83e742f6df8c035a01ad43a7179f8f44f42c1ab82e2c2906"
+}

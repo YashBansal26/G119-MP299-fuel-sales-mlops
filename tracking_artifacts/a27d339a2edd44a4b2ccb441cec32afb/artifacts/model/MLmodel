@@ -1,0 +1,30 @@
+artifact_path: model
+flavors:
+  python_function:
+    code: code
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: code
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.6.1
+mlflow_version: 2.19.0
+model_size_bytes: 26110
+model_uuid: 7b4a5c5d245c43f987b609a77c999928
+run_id: a27d339a2edd44a4b2ccb441cec32afb
+signature:
+  inputs: '[{"type": "double", "name": "highway_distance_km", "required": true}, {"type":
+    "double", "name": "nearby_pumps", "required": true}, {"type": "double", "name":
+    "price_rs", "required": true}, {"type": "double", "name": "trucks_passing", "required":
+    true}, {"type": "double", "name": "temp_c", "required": true}, {"type": "double",
+    "name": "staff", "required": true}, {"type": "string", "name": "ownership", "required":
+    true}, {"type": "string", "name": "zone", "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2026-11-23 18:23:32.977310'
