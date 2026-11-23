@@ -6,3 +6,4 @@ venv/
 mlruns/
 mlartifacts/
 reports/data_issues.json
+data/processed/

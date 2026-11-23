@@ -23,3 +23,16 @@ checks:
 
 reports:
   data_issues: reports/data_issues.json
+
+cleaning:
+  # Fixes for the problems found in Stage 1 (reports/findings.yaml)
+  sentinels:
+    staff: 999                # typed instead of a blank -> missing
+  stuck_sensor:
+    column: nearby_pumps      # same reading 2026-04-06 .. 2026-04-24 -> missing
+    start_date: "2026-04-06"
+    end_date: "2026-04-24"
+  target_typo_threshold: 60000  # litres_per_day above this was typed 10x too big
+  target_typo_factor: 10
+  output: data/processed/train_clean.csv
+  medians: data/processed/train_medians.json
