@@ -78,9 +78,9 @@ rather than starting an API or a cluster.
   alias **champion**. Tracking fields in `reports/findings.yaml` are filled.
   Numeric imputation, scaling and category encoding learn only from the
   training partition. See [the model handoff](docs/model-stage2.md).
-- **Next Ops check:** when model dependencies and tests arrive, keep library
-  versions pinned in `requirements.txt` and verify the combined CI run.
-  See [the Ops handoff](docs/ops-plan.md) for Stage 3 integration.
+- **Ops integration (Aryan):** Stage 3 now adds structured prediction logs,
+  checks the Kubernetes contract in CI, and builds/smoke-tests the API image
+  against the shipped champion. See [Stage 3 Ops](docs/ops-stage3.md).
 
 This documentation update was prepared with AI assistance.
 
@@ -159,6 +159,23 @@ python -m mp299.service_smoke
 
 See [the Stage 3 model integration evidence](docs/model-stage3.md) for the
 request, results, artifact identity checks and commands for a running API.
+
+### Stage 3 Ops — 27 November 2026
+
+The API writes one JSON event to stdout per successful prediction, with a
+UTC timestamp, status, HTTP status code and elapsed milliseconds. Rejected
+requests never invoke the model or produce prediction events. Model failures
+produce an error event containing only the exception type and return a
+generic HTTP 500 response. Request bodies and customer details are excluded.
+
+GitHub Actions runs the combined tests and the MP299 Kubernetes checker,
+builds `mp299-api:1.0`, starts it on runner-local port 8000, and reuses the
+Model lead's HTTP smoke test to compare its prediction with the saved
+pipeline and MLflow v1 champion. Container logs are printed before cleanup.
+No Kubernetes cluster is deployed by this workflow.
+
+See [the Ops verification commands and viva notes](docs/ops-stage3.md).
+This Stage 3 Ops implementation and its tests were prepared with AI assistance.
 
 ## Layout
 
