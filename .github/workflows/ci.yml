@@ -34,7 +34,7 @@ jobs:
       - name: Start container and wait for readiness
         run: |
           docker run --detach --name mp299-api-ci --publish 127.0.0.1:8000:8000 mp299-api:1.0
-          curl --fail --silent --show-error --retry 30 --retry-connrefused --retry-delay 2 --retry-max-time 90 http://127.0.0.1:8000/health
+          curl --fail --silent --show-error --retry 30 --retry-connrefused --retry-all-errors --retry-delay 2 --retry-max-time 90 http://127.0.0.1:8000/health
       - name: Compare container prediction with shipped champion
         run: python -m mp299.service_smoke --url http://127.0.0.1:8000
       - name: Show container logs and clean up

@@ -71,7 +71,7 @@ To repeat the container check on a machine with Docker:
 ```sh
 docker build -t mp299-api:1.0 .
 docker run --detach --name mp299-api-local --publish 127.0.0.1:8000:8000 mp299-api:1.0
-curl --fail --retry 30 --retry-connrefused --retry-delay 2 --retry-max-time 90 http://127.0.0.1:8000/health
+curl --fail --retry 30 --retry-connrefused --retry-all-errors --retry-delay 2 --retry-max-time 90 http://127.0.0.1:8000/health
 PYTHONPATH=src python -m mp299.service_smoke --url http://127.0.0.1:8000
 docker logs mp299-api-local
 docker rm --force mp299-api-local
