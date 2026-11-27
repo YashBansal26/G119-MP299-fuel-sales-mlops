@@ -76,3 +76,11 @@ MAE is at least 15 percent lower, then record the actual results in
 Future monitoring results and deployment outcomes are not claimed here.
 Implementation and documentation were prepared with AI coding assistance;
 the owner should review and understand the code before the individual viva.
+
+## Stage 3 update — 27 November 2026
+
+The full service/model integration is now present. The Ops contribution adds
+JSON prediction events, privacy-preserving error logs, dedicated logging tests,
+and CI steps for Kubernetes contract validation, Docker build, readiness and
+real HTTP champion comparison. See [Stage 3 Ops](ops-stage3.md) for commands
+and verification limits. Stage 4 monitoring/retraining remains pending.
