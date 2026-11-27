@@ -106,6 +106,60 @@ The existing `mp299.cleaning` command exports a fully imputed exploration CSV;
 training starts with raw data and applies the same fixed repair rules, then
 fits its imputer within the split to prevent validation leakage.
 
+## Stage 3 — prediction service
+
+From the repository root, install the requirements and start the API:
+
+```bash
+python -m pip install -r requirements.txt
+PYTHONPATH=src python -m uvicorn app.main:app --host 0.0.0.0 --port 8000
+```
+
+In PowerShell, set `$env:PYTHONPATH = "src"` before running Uvicorn.
+
+`GET /health` returns `{"status":"ok"}`. Use `POST /predict` with this JSON body:
+
+```json
+{
+  "highway_distance_km": 2.5,
+  "nearby_pumps": 4,
+  "price_rs": 96.5,
+  "trucks_passing": 350,
+  "temp_c": 32,
+  "staff": 6,
+  "ownership": "private",
+  "zone": "Highway"
+}
+```
+
+The response contains a numeric `prediction` in litres per day.
+Temperatures above 75 °C and negative highway distances return HTTP 422.
+The API loads the committed `models/model.joblib` at startup.
+
+To run in Docker:
+
+```bash
+docker build -t mp299-api:1.0 .
+docker run --rm -p 8000:8000 mp299-api:1.0
+```
+
+### Model Lead smoke-test — 27 November 2026
+
+The service prediction was checked against both the saved model file and
+MLflow v1 `champion`. All three returned **16220.040503070559 L/day** for the
+sample request above. Both TestClient and a real HTTP request to local Uvicorn
+passed; the combined local test suite passed **31 tests**.
+
+Repeat the check from the repository root:
+
+```powershell
+$env:PYTHONPATH="src"
+python -m mp299.service_smoke
+```
+
+See [the Stage 3 model integration evidence](docs/model-stage3.md) for the
+request, results, artifact identity checks and commands for a running API.
+
 ## Layout
 
 ```
@@ -114,4 +168,5 @@ src/mp299/             config.py, data_checks.py, explore.py
 tests/                 pytest tests (no CSVs needed)
 reports/findings.yaml  the marking form
 ```
+
 

@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-11-27T10:02:39.791959+00:00",
+  "transport": "TestClient",
+  "request": {
+    "highway_distance_km": 2.5,
+    "nearby_pumps": 4,
+    "price_rs": 96.5,
+    "trucks_passing": 350,
+    "temp_c": 32,
+    "staff": 6,
+    "ownership": "private",
+    "zone": "Highway"
+  },
+  "health_status": 200,
+  "health_response": {
+    "status": "ok"
+  },
+  "prediction_status": 200,
+  "api_prediction": 16220.040503070559,
+  "joblib_prediction": 16220.040503070559,
+  "champion_prediction": 16220.040503070559,
+  "predictions_match": true,
+  "registered_model_name": "mp299-fuel-sales",
+  "champion_version": 1,
+  "champion_run_id": "a27d339a2edd44a4b2ccb441cec32afb",
+  "model_sha256": "5461194f6b79e9cf83e742f6df8c035a01ad43a7179f8f44f42c1ab82e2c2906"
+}
